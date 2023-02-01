@@ -10,9 +10,7 @@ const toasterStyle = {
     position: 'top-left',
 }
 
-const exportJsonFile = (data) => {
-    if (!data) return;
-    
+const exportJsonFile = (data) => {    
     const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
         JSON.stringify(data, null, 4)
     )}`;
@@ -24,4 +22,4 @@ const exportJsonFile = (data) => {
 
 
 
-export { toasterStyle, exportJsonFile }
+export { toasterStyle, exportJsonFile };

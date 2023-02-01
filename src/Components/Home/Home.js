@@ -16,17 +16,21 @@ const Home = () => {
         const formData = new FormData();
         formData.append("file", inputFile);
 
-        axios.post('http://localhost:5000/processlog', formData)
+        axios.post('https://beanstalkedu-server-atique-atq.vercel.app/processlog', formData)
         .then(res =>  exportData(res.data?.data))
         .catch(error => {
             setErrorMessage(`Error occurred. Code: ${error.code}, Message: ${error.message}`);
         })
         .finally(()=> {
-            setLoading(false);
+            setTimeout(() => {setLoading(false)}, 200);
         })
     }
 
     const exportData = (data) => {
+        if (!data) {
+            toast.error('Empty File');
+            return;
+        };
         exportJsonFile(data);
         toast.success('File Downloaded!');
     };
@@ -45,7 +49,7 @@ const Home = () => {
                             <div className="">
                                 <input className="input input-bordered w-full max-w-xs pt-2 rounded-none "  type="file" id="file" 
                                 accept=".csv" onChange={ event => { setInputFile(event.target.files[0])}}/>
-                                <label for="file"><span className='italic text-xs'>(only .csv file)</span></label>
+                                <label htmlFor="file"><span className='italic text-xs'>(only .csv file)</span></label>
                             </div>
             
                             <div className="mt-10">
