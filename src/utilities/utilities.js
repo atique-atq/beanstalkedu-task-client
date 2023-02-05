@@ -1,3 +1,4 @@
+const unprocessableEntityResponse = 'ERR_BAD_REQUEST';
 
 const toasterStyle = {
     style: {
@@ -20,6 +21,15 @@ const exportJsonFile = (data) => {
     link.click();
 }
 
+const checkErrorCode = (error) => {
+    if (error?.code === unprocessableEntityResponse){
+        return 'Invalid Request. Please input a valid file';
+    }
+    else{
+        return `Error occurred. Code: ${error.code}, ${error.message}`
+    }
+}
 
 
-export { toasterStyle, exportJsonFile };
+
+export { toasterStyle, exportJsonFile, checkErrorCode };

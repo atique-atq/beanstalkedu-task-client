@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-import { exportJsonFile } from '../../utilities/utilities';
+import { exportJsonFile, checkErrorCode } from '../../utilities/utilities';
 import Loader from '../Shared/Loader';
 
 const Home = () => {
@@ -16,10 +16,10 @@ const Home = () => {
         const formData = new FormData();
         formData.append("file", inputFile);
 
-        axios.post('https://beanstalkedu-server-atique-atq.vercel.app/processlog', formData)
+        axios.post('http://localhost:5000/processlog', formData)
         .then(res =>  exportData(res.data?.data))
         .catch(error => {
-            setErrorMessage(`Error occurred. Code: ${error.code}, Message: ${error.message}`);
+            setErrorMessage(checkErrorCode(error));
         })
         .finally(()=> {
             setTimeout(() => {setLoading(false)}, 200);
@@ -27,8 +27,8 @@ const Home = () => {
     }
 
     const exportData = (data) => {
-        if (!data) {
-            toast.error('Empty File');
+        if (data?.length === 0) {
+            toast.error('Error File Format');
             return;
         };
         exportJsonFile(data);
