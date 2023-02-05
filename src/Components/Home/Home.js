@@ -69,10 +69,11 @@ const Home = () => {
                     <div >
                         {
                             !isEmptyObject(response) && <div>
-                                <p className='my-2 font-semibold underline text-blue-500 ml-8 text-xl'>Parsed Log is:</p>
-                                <div className='bg-[#1E1E1E] mt-4 lg:px-44 md:20 py-2 rounded-lg shadow-2xl'>
+                                <p className='mt-4 font-semibold underline text-blue-700 ml-8 text-xl'>Parsed Log is:</p>
+                                <div className='bg-[#1E1E1E] mt-2 lg:px-44 md:20 rounded-lg shadow-2xl'>
                                     <ReactJson name={false} theme={'twilight'} displayDataTypes={false}
-                                    displayObjectSize={false} indentWidth={4    } src={response} />
+                                    displayObjectSize={false} indentWidth={4} groupArraysAfterLength={false} 
+                                    displayArrayKey={false} src={response} />
                                 </div>
                             </div>
                         }
