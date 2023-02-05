@@ -30,6 +30,10 @@ const checkErrorCode = (error) => {
     }
 }
 
+const isEmptyObject = (objectValue) => {
+    return Object.keys(objectValue).length === 0
+}
 
 
-export { toasterStyle, exportJsonFile, checkErrorCode };
+
+export { toasterStyle, exportJsonFile, checkErrorCode, isEmptyObject };
